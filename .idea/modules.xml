@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Fake_location_detector.iml" filepath="$PROJECT_DIR$/Fake_location_detector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/locationdetector/locationdetector.iml" filepath="$PROJECT_DIR$/locationdetector/locationdetector.iml" />
+    </modules>
+  </component>
+</project>
