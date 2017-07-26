@@ -1,15 +1,18 @@
 package com.redcarpetup.locationdetector;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 /**
@@ -64,6 +67,9 @@ public class LocationManager extends Service implements LocationListener {
                 // no network provider is enabled
             } else {
                 this.canGetLocation = true;
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+
                 // First get location from Network Provider
                 if (isNetworkEnabled) {
                     locationManager.requestLocationUpdates(
@@ -99,7 +105,7 @@ public class LocationManager extends Service implements LocationListener {
                     }
                 }
             }
-
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,7 +119,7 @@ public class LocationManager extends Service implements LocationListener {
      * */
     public void stopUsingGPS(){
         if(locationManager != null){
-            locationManager.removeUpdates(GPSTracker.this);
+            locationManager.removeUpdates(LocationManager.this);
         }
     }
 
