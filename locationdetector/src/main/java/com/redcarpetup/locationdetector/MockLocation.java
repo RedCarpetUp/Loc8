@@ -23,6 +23,26 @@ public class MockLocation {
         return location;
     }
 
+    public double getLatitude()
+    {
+        LocationManager locationManager = new LocationManager(mContextx);
+        Location location = locationManager.getLocation();
+        return location.getLatitude();
+    }
+    public double getLongitude()
+    {
+        LocationManager locationManager = new LocationManager(mContextx);
+        Location location = locationManager.getLocation();
+        return location.getLongitude();
+    }
+
+    public boolean isMockLocation()
+    {
+        LocationManager locationManager = new LocationManager(mContextx);
+        Location location = locationManager.getLocation();
+        return MockLocationUtils.isLocationFromMockProvider(mContextx,location);
+    }
+
 
 
 }
