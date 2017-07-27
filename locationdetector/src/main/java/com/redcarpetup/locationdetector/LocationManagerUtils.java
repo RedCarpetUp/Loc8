@@ -19,7 +19,7 @@ import android.util.Log;
  * Created by redcarpet on 7/24/17.
  */
 
-public class LocationManager extends Service implements LocationListener {
+public class LocationManagerUtils extends Service implements LocationListener {
 
     private final Context mContext;
 
@@ -45,7 +45,7 @@ public class LocationManager extends Service implements LocationListener {
     // Declaring a Location Manager
     protected android.location.LocationManager locationManager;
 
-    public LocationManager(Context context) {
+    public LocationManagerUtils(Context context) {
         this.mContext = context;
         getLocation();
     }
@@ -119,7 +119,7 @@ public class LocationManager extends Service implements LocationListener {
      * */
     public void stopUsingGPS(){
         if(locationManager != null){
-            locationManager.removeUpdates(LocationManager.this);
+            locationManager.removeUpdates(LocationManagerUtils.this);
         }
     }
 
