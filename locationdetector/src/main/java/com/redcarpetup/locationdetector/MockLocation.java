@@ -42,6 +42,7 @@ public class MockLocation {
         Location location = locationManager.getLocation();
         return MockLocationUtils.isLocationFromMockProvider(mContextx,location);
     }
+//    public boolean
 
 
 
