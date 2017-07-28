@@ -11,9 +11,10 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 public class CommonUtils {
 
+    // Checking is Google play service available
 
-    public static boolean idPlayServiceAviliable(Context context) {
-        boolean idPlayService ;
+    public static boolean idPlayServiceAvailable(Context context) {
+        boolean idPlayService;
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context);
         if (status == ConnectionResult.SUCCESS) {
             idPlayService = true;
