@@ -40,7 +40,6 @@ public class CommonUtils {
             } catch (Settings.SettingNotFoundException e) {
                 e.printStackTrace();
             }
-
             return locationMode != Settings.Secure.LOCATION_MODE_OFF;
 
         } else {
