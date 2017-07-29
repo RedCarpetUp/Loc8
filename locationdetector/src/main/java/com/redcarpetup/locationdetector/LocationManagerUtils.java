@@ -55,7 +55,6 @@ public class LocationManagerUtils extends Service implements LocationListener {
             locationManager = (android.location.LocationManager) mContext
                     .getSystemService(LOCATION_SERVICE);
 
-            // getting GPS status
             isGPSEnabled = locationManager
                     .isProviderEnabled(android.location.LocationManager.GPS_PROVIDER);
 
