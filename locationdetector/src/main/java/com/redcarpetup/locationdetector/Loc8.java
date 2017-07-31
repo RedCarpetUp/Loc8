@@ -9,6 +9,7 @@ import android.provider.Settings;
 import android.support.annotation.IntDef;
 import android.util.Log;
 
+import com.redcarpetup.locationdetector.Callbacks.LocationCallback;
 import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationManagerUtils;
 import com.redcarpetup.locationdetector.Utils.CommonUtils;

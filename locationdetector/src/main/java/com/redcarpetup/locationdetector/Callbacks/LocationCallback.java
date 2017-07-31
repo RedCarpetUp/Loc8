@@ -1,4 +1,4 @@
-package com.redcarpetup.locationdetector;
+package com.redcarpetup.locationdetector.Callbacks;
 
 import android.location.Location;
 
