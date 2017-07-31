@@ -14,8 +14,6 @@ import android.support.v4.content.ContextCompat;
  */
 
 public class PermissionUtils {
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
 
     public static boolean checkLocationPermission(Context activity) {
         if (ContextCompat.checkSelfPermission(activity,
