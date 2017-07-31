@@ -160,7 +160,7 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
         }
     }
 
-    interface Callback {
+    public interface Callback {
         public void onLocationResult(Location location);
     }
 

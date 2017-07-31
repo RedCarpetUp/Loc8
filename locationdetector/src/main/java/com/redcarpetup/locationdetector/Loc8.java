@@ -9,7 +9,7 @@ import android.provider.Settings;
 import android.support.annotation.IntDef;
 import android.util.Log;
 
-import com.redcarpetup.locationdetector.Callbacks.LocationCallback;
+import com.redcarpetup.locationdetector.ProviderUtils.LocationCallback;
 import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationManagerUtils;
 import com.redcarpetup.locationdetector.Utils.CommonUtils;
@@ -87,7 +87,7 @@ public class Loc8 {
 
     private Location getLocationFromProvider() {
         LocationManagerUtils utils = new LocationManagerUtils(mContext);
-        Location location = utils.getLocation();
+        Location location = utils.getLocation(mContext);
         return location;
     }
 
@@ -115,7 +115,7 @@ public class Loc8 {
         else
         {
             LocationManagerUtils utils = new LocationManagerUtils(mContext);
-            Location location = utils.getLocation();
+            Location location = utils.getLocation(mContext);
             return location;
         }
         return fusedLocation;
