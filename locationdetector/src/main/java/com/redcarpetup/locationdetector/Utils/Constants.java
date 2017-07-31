@@ -1,4 +1,4 @@
-package com.redcarpetup.locationdetector;
+package com.redcarpetup.locationdetector.Utils;
 
 /**
  * Created by redcarpet on 7/31/17.

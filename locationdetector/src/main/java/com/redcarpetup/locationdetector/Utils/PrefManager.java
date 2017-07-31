@@ -1,4 +1,4 @@
-package com.redcarpetup.locationdetector;
+package com.redcarpetup.locationdetector.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

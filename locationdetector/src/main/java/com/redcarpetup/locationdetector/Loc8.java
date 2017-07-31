@@ -5,11 +5,16 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.IntDef;
-import android.text.TextUtils;
 import android.util.Log;
+
+import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
+import com.redcarpetup.locationdetector.ProviderUtils.LocationManagerUtils;
+import com.redcarpetup.locationdetector.Utils.CommonUtils;
+import com.redcarpetup.locationdetector.Utils.Constants;
+import com.redcarpetup.locationdetector.Utils.PermissionUtils;
+import com.redcarpetup.locationdetector.Utils.PrefManager;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

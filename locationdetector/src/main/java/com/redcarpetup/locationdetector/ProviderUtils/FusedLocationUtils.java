@@ -1,4 +1,4 @@
-package com.redcarpetup.locationdetector;
+package com.redcarpetup.locationdetector.ProviderUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +16,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.redcarpetup.locationdetector.Utils.PermissionUtils;
 
 import java.util.Calendar;
 
@@ -50,39 +51,10 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-
-    }
-
-    public void getCurrentLocation(int maxTries) {
-        this.maxTries = maxTries;
-        chooseNetworkGps();
-        buildGoogleApiClient();
-        lastKnownLocation = false;
-        inProgress = true;
-        if (canGetLocation())
-            mGoogleApiClient.connect();
-    }
-
-
-    public void getLastKnownLocation(long diffTime, float minAccuracy) {
-        this.diffTime = diffTime;
-        this.minAccuracy = minAccuracy;
-        chooseNetworkGps();
-        buildGoogleApiClient();
-        lastKnownLocation = true;
-        inProgress = true;
-        if (canGetLocation())
-            mGoogleApiClient.connect();
-    }
-
-    public void setCallback(Callback callback) {
-        mCallback = callback;
-    }
-
-    protected synchronized void buildGoogleApiClient() {
-        Log.i(TAG, "Building GoogleApiClient");
         createLocationRequest();
+
     }
+
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
@@ -93,13 +65,10 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
 
     public void startLocationUpdates() {
-        if (PermissionUtils.checkLocationPermission(mContext))
-        {
+        if (PermissionUtils.checkLocationPermission(mContext)) {
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient, mLocationRequest, this);
-        }
-        else
-        {
+        } else {
             Log.i(TAG, "No location permission");
         }
 
@@ -129,18 +98,11 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
     }
 
-    public Location getLocation(int maxtries) {
-        if (numTries >= maxtries)
-            return mCurrentLocation;
-        else
-            return null;
-    }
 
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "Connected to GoogleApiClient");
-        if (PermissionUtils.checkLocationPermission(mContext))
-        {
+        if (PermissionUtils.checkLocationPermission(mContext)) {
             if (lastKnownLocation) {
                 mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                 if (mCurrentLocation != null && (mCurrentLocation.getTime() - Calendar.getInstance().getTime().getTime()) < diffTime
@@ -153,9 +115,7 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
             } else {
                 startLocationUpdates();
             }
-        }
-        else
-        {
+        } else {
             Log.i(TAG, "No location permission");
 
         }
@@ -174,39 +134,12 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
     }
 
 
-    public void showSettingsAlert() {
-        if (!(mContext instanceof Activity)) {
-            return; //only show dialog if called from activity.
-        }
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
-        alertDialog.setTitle("GPS settings");
-        alertDialog.setMessage("GPS is not enabled. " +
-                "This app uses GPS. Do you want to go to settings menu?");
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                mContext.startActivity(intent);
-            }
-        });
-
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        alertDialog.show();
-    }
-
     public void reset() {
         numTries = 0;
         mCurrentLocation = null;
         inProgress = false;
         lastKnownLocation = false;
         mGoogleApiClient.disconnect();
-    }
-
-    public boolean canGetLocation() {
-        return isNetworkEnabled() || isGPSEnabled();
     }
 
     public boolean isNetworkEnabled() {
@@ -225,10 +158,6 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
         } else {
             PRIORITY = LocationRequest.PRIORITY_NO_POWER;
         }
-    }
-
-    public boolean isInProgress() {
-        return inProgress;
     }
 
     interface Callback {

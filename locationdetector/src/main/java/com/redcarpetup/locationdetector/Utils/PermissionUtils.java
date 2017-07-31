@@ -1,4 +1,4 @@
-package com.redcarpetup.locationdetector;
+package com.redcarpetup.locationdetector.Utils;
 
 import android.Manifest;
 import android.app.Activity;
