@@ -88,39 +88,22 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
         mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-
         mLocationRequest.setPriority(PRIORITY);
     }
 
-    /**
-     * Requests location updates from the FusedLocationApi.
-     */
-    public void startLocationUpdates() {
-        // The final argument to {@code requestLocationUpdates()} is a LocationListener
-        // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
 
+    public void startLocationUpdates() {
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 mGoogleApiClient, mLocationRequest, this);
     }
 
-    /**
-     * Removes location updates from the FusedLocationApi.
-     */
+
     public void stopLocationUpdates() {
-        // It is a good practice to remove location requests when the activity is in a paused or
-        // stopped state. Doing so helps battery performance and is especially
-        // recommended in applications that request frequent location updates.
-
-        // The final argument to {@code requestLocationUpdates()} is a LocationListener
-        // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-
+       LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         reset();
     }
 
-    /**
-     * Callback that fires when the location changes.
-     */
+
     @Override
     public void onLocationChanged(Location location) {
         numTries++;
@@ -134,7 +117,6 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
             stopLocationUpdates();
         } else {
             chooseNetworkGps();
-            //Toast.makeText(mContext, "latitude: "+mCurrentLocation.getLatitude()+" Longitude: "+mCurrentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -146,19 +128,9 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
             return null;
     }
 
-    /**
-     * Runs when a GoogleApiClient object successfully connects.
-     */
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "Connected to GoogleApiClient");
-
-        // If the initial location was never previously requested, we use
-        // FusedLocationApi.getLastKnownLocation() to get it. If it was previously requested, we store
-        // its value in the Bundle and check for it in onCreate(). We
-        // do not request it again unless the user specifically requests location updates by pressing
-        // the Start Updates button.
-        //
         if (lastKnownLocation) {
             mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (mCurrentLocation != null && (mCurrentLocation.getTime() - Calendar.getInstance().getTime().getTime()) < diffTime
@@ -176,37 +148,24 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
     @Override
     public void onConnectionSuspended(int cause) {
-        // The connection to Google Play services was lost for some reason. We call connect() to
-        // attempt to re-establish the connection.
         Log.i(TAG, "Connection suspended");
         mGoogleApiClient.connect();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
-        // onConnectionFailed.
         Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
     }
 
-    /**
-     * Function to show settings alert dialog
-     * On pressing Settings button will lauch Settings Options
-     */
+
     public void showSettingsAlert() {
         if(!(mContext instanceof Activity)){
             return; //only show dialog if called from activity.
         }
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
-
-        // Setting Dialog Title
         alertDialog.setTitle("GPS settings");
-
-        // Setting Dialog Message
         alertDialog.setMessage("GPS is not enabled. " +
                 "This app uses GPS. Do you want to go to settings menu?");
-
-        // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -214,14 +173,11 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
             }
         });
 
-        // on pressing cancel button
         alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
-
-        // Showing Alert Message
         alertDialog.show();
     }
 
