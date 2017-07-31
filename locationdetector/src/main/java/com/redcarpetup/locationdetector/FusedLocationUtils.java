@@ -24,6 +24,8 @@ import java.util.Calendar;
  */
 
 public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+
+
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private final static String TAG = "FUSED LOCATION";
@@ -91,8 +93,16 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
 
     public void startLocationUpdates() {
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
+        if (PermissionUtils.checkLocationPermission(mContext))
+        {
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, mLocationRequest, this);
+        }
+        else
+        {
+            Log.i(TAG, "No location permission");
+        }
+
     }
 
 
@@ -129,17 +139,25 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "Connected to GoogleApiClient");
-        if (lastKnownLocation) {
-            mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (mCurrentLocation != null && (mCurrentLocation.getTime() - Calendar.getInstance().getTime().getTime()) < diffTime
-                    && mCurrentLocation.getAccuracy() <= minAccuracy) {
-                mCallback.onLocationResult(mCurrentLocation);
-                reset();
+        if (PermissionUtils.checkLocationPermission(mContext))
+        {
+            if (lastKnownLocation) {
+                mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                if (mCurrentLocation != null && (mCurrentLocation.getTime() - Calendar.getInstance().getTime().getTime()) < diffTime
+                        && mCurrentLocation.getAccuracy() <= minAccuracy) {
+                    mCallback.onLocationResult(mCurrentLocation);
+                    reset();
+                } else {
+                    startLocationUpdates();
+                }
             } else {
                 startLocationUpdates();
             }
-        } else {
-            startLocationUpdates();
+        }
+        else
+        {
+            Log.i(TAG, "No location permission");
+
         }
 
     }
