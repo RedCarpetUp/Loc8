@@ -1,11 +1,19 @@
 package com.redcarpetup.locationdetector;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.IntDef;
+import android.text.TextUtils;
+import android.util.Log;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 /**
  * Created by redcarpet on 7/31/17.
@@ -49,6 +57,8 @@ public class Loc8 {
             if (CommonUtils.isLocationEnabled(mContext)) {
                 switch (PrefManager.getIntegerPreference(mContext, Constants.ProviderType, 0)) {
                     case 0:
+                        Location defaultLocation = getDefaultLocation();
+                        locationCallback.onSuccess(defaultLocation);
                         break;
                     case 1:
                         Location providerLocation = getLocationFromProvider();
@@ -85,5 +95,75 @@ public class Loc8 {
         return fusedLocation;
     }
 
+    private Location getDefaultLocation()
+    {
+        if (CommonUtils.isPlayServiceAvailable(mContext))
+        {
+            FusedLocationUtils locationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
+                @Override
+                public void onLocationResult(Location location) {
+                    fusedLocation = location;
+                }
+            });
+        }
+        else
+        {
+            LocationManagerUtils utils = new LocationManagerUtils(mContext);
+            Location location = utils.getLocation();
+            return location;
+        }
+        return fusedLocation;
+    }
+
+    public static boolean areThereMockPermissionApps(Context context) {
+        int count = 0;
+        PackageManager pm = context.getPackageManager();
+        List<ApplicationInfo> packages =
+                pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+        for (ApplicationInfo applicationInfo : packages) {
+            try {
+                PackageInfo packageInfo = pm.getPackageInfo(applicationInfo.packageName,
+                        PackageManager.GET_PERMISSIONS);
+                String[] requestedPermissions = packageInfo.requestedPermissions;
+
+                if (requestedPermissions != null) {
+                    for (int i = 0; i < requestedPermissions.length; i++) {
+                        if (requestedPermissions[i]
+                                .equals("android.permission.ACCESS_MOCK_LOCATION")
+                                && !applicationInfo.packageName.equals(context.getPackageName())) {
+                            count++;
+                        }
+                    }
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e("Got exception ", e.getMessage());
+            }
+        }
+
+        if (count > 0)
+            return true;
+        return false;
+    }
+
+    public static boolean isLocationFromMockProvider(Context context, Location location) {
+        boolean isMock = false;
+        if (location != null) {
+            try {
+                if (android.os.Build.VERSION.SDK_INT >= 18) {
+                    isMock = location.isFromMockProvider();
+                } else {
+                    if (Settings.Secure.getString(context.getContentResolver(),
+                            Settings.Secure.ALLOW_MOCK_LOCATION).equals("0"))
+                        return false;
+                    else {
+                        return true;
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+        return isMock;
+    }
 
 }
