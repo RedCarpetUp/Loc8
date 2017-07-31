@@ -43,6 +43,12 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
     public FusedLocationUtils(Context c, Callback callback) {
         this.mContext = c;
         this.mCallback = callback;
+        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
     }
 
     public void getCurrentLocation(int maxTries) {
@@ -73,11 +79,6 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
     protected synchronized void buildGoogleApiClient() {
         Log.i(TAG, "Building GoogleApiClient");
-        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
         createLocationRequest();
     }
 
@@ -96,7 +97,7 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
 
     public void stopLocationUpdates() {
-       LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         reset();
     }
 
@@ -156,7 +157,7 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
 
     public void showSettingsAlert() {
-        if(!(mContext instanceof Activity)){
+        if (!(mContext instanceof Activity)) {
             return; //only show dialog if called from activity.
         }
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
@@ -215,4 +216,6 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
     interface Callback {
         public void onLocationResult(Location location);
     }
+
+
 }
