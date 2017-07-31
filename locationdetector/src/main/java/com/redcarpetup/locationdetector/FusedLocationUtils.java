@@ -27,25 +27,11 @@ import java.util.Calendar;
  */
 
 public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
-    /**
-     * The desired interval for location updates. Inexact. Updates may be more or less frequent.
-     */
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
-    /**
-     * The fastest rate for active location updates. Exact. Updates will never be more frequent
-     * than this value.
-     */
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private final static String TAG = "FUSED LOCATION";
-
     public Callback mCallback = null;
-    /**
-     * Stores parameters for requests to the FusedLocationProviderApi.
-     */
     protected LocationRequest mLocationRequest;
-    /**
-     * Provides the entry point to Google Play services.
-     */
     private GoogleApiClient mGoogleApiClient;
     private Context mContext;
     private Location mCurrentLocation = null;
@@ -62,10 +48,6 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
         this.mCallback = callback;
     }
 
-    /**
-     Sets up FusedLocation Updates and chooses the best reading among `maxTries` samples.
-     @param maxTries Maximum number of times to sample GPS readings
-     */
     public void getCurrentLocation(int maxTries) {
         this.maxTries = maxTries;
         chooseNetworkGps();
@@ -76,13 +58,6 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
             mGoogleApiClient.connect();
     }
 
-    /**
-     Checks FusedLocation's last known location and checks to see if the the time the location was sampled
-     and the accuracy of the sample is within specified limits.
-     Otherwise, it sets up fusedlocation updates and tries to get a fresh gps sample.
-     @param diffTime - The maximum time, in milliseconds, that may have elapsed since the last sample.
-     @param minAccuracy - The minimum accuracy, in meters, that is required of the last sample.
-     */
 
     public void getLastKnownLocation(long diffTime, float minAccuracy) {
         this.diffTime = diffTime;
@@ -111,15 +86,7 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
-
-        // Sets the desired interval for active location updates. This interval is
-        // inexact. You may not receive updates at all if no location sources are available, or
-        // you may receive them slower than requested. You may also receive updates faster than
-        // requested if other applications are requesting location at a faster interval.
         mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
-
-        // Sets the fastest rate for active location updates. This interval is exact, and your
-        // application will never receive updates faster than this value.
         mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
 
         mLocationRequest.setPriority(PRIORITY);
