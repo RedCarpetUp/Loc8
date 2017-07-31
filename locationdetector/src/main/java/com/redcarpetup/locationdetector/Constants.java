@@ -7,5 +7,9 @@ package com.redcarpetup.locationdetector;
 public class Constants {
 
     public static String ProviderType = "providerType";
+    public static String NO_LOCATION_PEMISSION = "no_location_permission";
+    public static String LOCATION_NOT_ENABLED = "location_not_enabled";
+
+
 
 }
