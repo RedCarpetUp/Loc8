@@ -9,6 +9,8 @@ import android.provider.Settings;
 import android.support.annotation.IntDef;
 import android.util.Log;
 
+import com.redcarpetup.locationdetector.ProviderUtils.FusedCallback;
+import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUti;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationCallback;
 import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationManagerUtils;
@@ -92,9 +94,16 @@ public class Loc8 {
     }
 
     private Location getLocationFromLocationApi() {
-        FusedLocationUtils locationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
+      /*  FusedLocationUtils locationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
             @Override
             public void onLocationResult(Location location) {
+                fusedLocation = location;
+            }
+        });
+*/
+        FusedLocationUti uti = new FusedLocationUti(mContext, new FusedCallback() {
+            @Override
+            public void onSuccess(Location location) {
                 fusedLocation = location;
             }
         });

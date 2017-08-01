@@ -28,7 +28,6 @@ public class LocationManagerUtils implements LocationListener {
 
     public LocationManagerUtils(Context context) {
         this.mContext = context;
-        getLocation(context);
     }
 
     public Location getLocation(Context mContext) {
@@ -44,7 +43,6 @@ public class LocationManagerUtils implements LocationListener {
             if (!isGPSEnabled && !isNetworkEnabled) {
             } else {
                 this.canGetLocation = true;
-                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     if (isNetworkEnabled) {
                     locationManager.requestLocationUpdates(
                             android.location.LocationManager.NETWORK_PROVIDER,
@@ -77,7 +75,7 @@ public class LocationManagerUtils implements LocationListener {
                         }
                     }
                 }
-            }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
