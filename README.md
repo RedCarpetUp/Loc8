@@ -4,6 +4,7 @@
 
 Loc8 is a android location manager library to get accurate location simply.
 
+This libray use [Android location manager](https://developer.android.com/reference/android/location/LocationManager.html) and very cool and optimized Google play service location provider api [FusedLocationProvider](https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi)uses a mix of hardware to determine location based on the context of the request, meaning it's optimized transparently to you. It will also cache captured locations between applications to avoid unnecessary work to determine location info. So if a user has a variety of location-aware apps, they potentially avoid taxing the device (and waiting) for a location capture as one may have already been cached.
 
 
 
