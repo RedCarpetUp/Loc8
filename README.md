@@ -12,10 +12,21 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
 * Check whether the application has required permission or not
 * Check whether GPS Provider is enabled or not
 * Check whether Network Provider is enabled or not
+* if location not available you can get LastKnown location
 
 # Usage
 
-#### Get location with Loc8.DEFAULT
+## Permission
+Don't forget to add the following permissions to your AndroidManifest.xml
+
+```
+ <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+```
+
+#### Get location with Loc8.DEFAULT TAG
 
 By Using <b>Loc8.DEFAULT</b> TAG library check if Google play service is available, if available library access location using <b>FusedLocationProvider</b> and if Google play service not available library access location using Android default <b>Location Manager</b>
 
@@ -31,7 +42,47 @@ By Using <b>Loc8.DEFAULT</b> TAG library check if Google play service is availab
         });
 
 ```
+#### Get location with Loc8.Loc8.LOCATION_API TAG
+By Using <b>Loc8.LOCATION_API</b> TAG library access location using <b>FusedLocationProvider</b> and if google play service not available return error.
 
+```
+  Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.DEFAULT);
+        loc8.getLocation(new LocationCallback() {
+            @Override
+            public void onError(String error) {
+               }
+            @Override
+            public void onSuccess(Location location) {
+              }
+        });
+
+```
+#### Get location with Loc8.Loc8.LOCATION_MANAGER TAG
+By Using <b>Loc8.LOCATION_MANAGER</b> TAG  Android default <b>Location Manager</b>.
+
+
+```
+  Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.LOCATION_MANAGER);
+        loc8.getLocation(new LocationCallback() {
+            @Override
+            public void onError(String error) {
+               }
+            @Override
+            public void onSuccess(Location location) {
+              }
+        });
+
+```
+#### Check if location is mocked
+
+
+```
+ Loc8.isLocationFromMockProvider(mcontext,mLocation)
+```
+#### Check if Mock location app aviliable in Phone
+```
+ Loc8.areThereMockPermissionApps(mcontext)
+```
 
 # Installation
 
