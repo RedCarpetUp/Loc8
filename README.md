@@ -16,6 +16,7 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
 # Usage
 
 #### Get location with log8
+
 '''
  
  Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.DEFAULT);
