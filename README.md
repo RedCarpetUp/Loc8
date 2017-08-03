@@ -15,7 +15,9 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
 
 # Usage
 
-#### Get location with log8
+#### Get location with Loc8.DEFAULT
+
+By Using Loc8.DEFAULT library check if Google play service is aviliable, if aviliable library access location using FusedLocationProvider and if Google play service not aviliable library access location using Android default <b>Location Manager</b>
 
 ```
   Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.DEFAULT);
