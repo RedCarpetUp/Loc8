@@ -11,6 +11,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.redcarpetup.locationdetector.Utils.PermissionUtils;
 
 import java.util.Calendar;
 
@@ -55,9 +56,11 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
 
 
     public void startLocationUpdates() {
+        if (PermissionUtils.checkLocationPermission(mContext)) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, mLocationRequest, this);
+        }
 
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, mLocationRequest, this);
     }
 
     public void onLocationChanged(Location location) {
@@ -79,12 +82,14 @@ public class FusedLocationUtils implements GoogleApiClient.ConnectionCallbacks, 
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "Connected to GoogleApiClient");
         if (lastKnownLocation) {
-            mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (mCurrentLocation != null && (mCurrentLocation.getTime() - Calendar.getInstance().getTime().getTime()) < diffTime
-                    && mCurrentLocation.getAccuracy() <= minAccuracy) {
-                mCallback.onSuccess(mCurrentLocation);
-            } else {
-                startLocationUpdates();
+            if(PermissionUtils.checkLocationPermission(mContext)) {
+                mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                if (mCurrentLocation != null && (mCurrentLocation.getTime() - Calendar.getInstance().getTime().getTime()) < diffTime
+                        && mCurrentLocation.getAccuracy() <= minAccuracy) {
+                    mCallback.onSuccess(mCurrentLocation);
+                } else {
+                    startLocationUpdates();
+                }
             }
         } else {
             startLocationUpdates();

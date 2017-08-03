@@ -8,7 +8,6 @@ import android.location.Location;
 import android.provider.Settings;
 import android.support.annotation.IntDef;
 import android.util.Log;
-
 import com.redcarpetup.locationdetector.ProviderUtils.FusedCallback;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationCallback;
 import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
@@ -31,7 +30,6 @@ public class Loc8 {
     public Context mContext;
     public static Loc8 loc8;
     public LocationCallback locationCallback;
-    public Location fusedLocation = null;
     public static final int DEFAULT = 0;
     public static final int LOCATION_MANAGER = 1;
     public static final int LOCATION_API = 2;
@@ -130,7 +128,6 @@ public class Loc8 {
         PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages =
                 pm.getInstalledApplications(PackageManager.GET_META_DATA);
-
         for (ApplicationInfo applicationInfo : packages) {
             try {
                 PackageInfo packageInfo = pm.getPackageInfo(applicationInfo.packageName,

@@ -5,9 +5,13 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+
+import com.redcarpetup.locationdetector.Utils.PermissionUtils;
 
 /**
  * Created by redcarpet on 7/24/17.
@@ -22,8 +26,8 @@ public class LocationManagerUtils implements LocationListener {
     Location location;
     double latitude;
     double longitude;
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0; // 10 meters
+    private static final long MIN_TIME_BW_UPDATES = 0; // 1 minute
     protected android.location.LocationManager locationManager;
 
     public LocationManagerUtils(Context context) {
@@ -43,11 +47,13 @@ public class LocationManagerUtils implements LocationListener {
             if (!isGPSEnabled && !isNetworkEnabled) {
             } else {
                 this.canGetLocation = true;
-                    if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(
-                            android.location.LocationManager.NETWORK_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                if (isNetworkEnabled) {
+                    if (PermissionUtils.checkLocationPermission(mContext)) {
+                        locationManager.requestLocationUpdates(
+                                android.location.LocationManager.NETWORK_PROVIDER,
+                                MIN_TIME_BW_UPDATES,
+                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    }
                     Log.d("Network", "Network");
                     if (locationManager != null) {
                         location = locationManager
@@ -86,6 +92,7 @@ public class LocationManagerUtils implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        this.location = location;
     }
 
     @Override
