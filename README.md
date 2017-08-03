@@ -17,8 +17,8 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
 
 #### Get location with log8
 
-'''
-        Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.DEFAULT);
+```
+  Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.DEFAULT);
         loc8.getLocation(new LocationCallback() {
             @Override
             public void onError(String error) {
@@ -27,8 +27,8 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
             public void onSuccess(Location location) {
               }
         });
-'''
 
+```
 
 
 # Installation
