@@ -54,7 +54,6 @@ public class LocationManagerUtils implements LocationListener {
                                 MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     }
-                    Log.d("Network", "Network");
                     if (locationManager != null) {
                         location = locationManager
                                 .getLastKnownLocation(android.location.LocationManager.NETWORK_PROVIDER);
