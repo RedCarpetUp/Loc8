@@ -1,9 +1,6 @@
-# App lock library for Android
-[![](https://jitpack.io/v/balrampandey19/AppLocker.svg)](https://jitpack.io/#balrampandey19/AppLocker)
-[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+# LocationManager and Fake location detector 
 
-
-<img align="center" src='https://raw.githubusercontent.com/balrampandey19/AppLocker/master/Screen/icon.png' width='200' height='200'/>
+<img align="center" src='https://github.com/balrampandey19/FakeLocationDetctor/blob/master/Screen/loc8.png' width='200' height='200'/>
 
 AppLocker is a library to protect apps using a four digit pin
 
