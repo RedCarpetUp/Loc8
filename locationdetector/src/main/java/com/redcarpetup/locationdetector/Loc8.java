@@ -73,8 +73,7 @@ public class Loc8 {
                         locationCallback.onSuccess(providerLocation);
                         break;
                     case 2:
-                        Location fusedLocation = getLocationFromLocationApi();
-                        locationCallback.onSuccess(fusedLocation);
+                       getLocationFromLocationApi();
                         break;
                 }
             } else {
@@ -94,17 +93,10 @@ public class Loc8 {
     }
 
     private Location getLocationFromLocationApi() {
-      /*  FusedLocationUtils locationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
+        FusedLocationUtils fusedLocationUtils = new FusedLocationUtils(mContext,new FusedLocationUtils.Callback() {
             @Override
             public void onLocationResult(Location location) {
-                fusedLocation = location;
-            }
-        });
-*/
-        FusedLocationUti uti = new FusedLocationUti(mContext, new FusedCallback() {
-            @Override
-            public void onSuccess(Location location) {
-                fusedLocation = location;
+                locationCallback.onSuccess(location);
             }
         });
         return fusedLocation;

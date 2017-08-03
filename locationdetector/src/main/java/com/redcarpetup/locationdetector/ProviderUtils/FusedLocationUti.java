@@ -30,15 +30,13 @@ public class FusedLocationUti implements GoogleApiClient.ConnectionCallbacks, Go
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
-    private static final long INTERVAL = 1000 * 10;
-    private static final long FASTEST_INTERVAL = 1000 * 5;
+    private static final long INTERVAL = 0;
+    private static final long FASTEST_INTERVAL = 00;
 
     public FusedLocationUti(Context context, FusedCallback fusedCallback) {
         this.mContext = context;
         this.callback = fusedCallback;
         connectApiClient();
-
-
         createLocationRequest();
     }
 
@@ -105,4 +103,5 @@ public class FusedLocationUti implements GoogleApiClient.ConnectionCallbacks, Go
         mCurrentLocation = null;
         mGoogleApiClient.disconnect();
     }
+
 }

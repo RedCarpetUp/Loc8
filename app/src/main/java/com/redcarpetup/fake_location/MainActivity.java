@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationCallback;
 import com.redcarpetup.locationdetector.Loc8;
 
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         getLocationProvider();
         getFusedProvider();
         getDefaultProvider();
-
     }
 
     public void getLocationProvider() {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Location location) {
-                locationProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
+                fusedProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
 
             }
         });
