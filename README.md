@@ -13,6 +13,10 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
 * Check whether GPS Provider is enabled or not
 * Check whether Network Provider is enabled or not
 
+# Installation
+
+
+
 
 # License
 
