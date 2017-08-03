@@ -9,4 +9,6 @@ import android.location.Location;
 public interface FusedCallback {
 
     void onSuccess(Location location);
+    void onFail(String error);
+
 }

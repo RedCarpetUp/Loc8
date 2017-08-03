@@ -10,7 +10,6 @@ import android.support.annotation.IntDef;
 import android.util.Log;
 
 import com.redcarpetup.locationdetector.ProviderUtils.FusedCallback;
-import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUti;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationCallback;
 import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationManagerUtils;
@@ -91,20 +90,32 @@ public class Loc8 {
     }
 
     protected void getLocationFromLocationApi() {
-        FusedLocationUtils fusedLocationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
+        FusedLocationUtils locationUtils = new FusedLocationUtils(mContext, new FusedCallback() {
             @Override
-            public void onLocationResult(Location location) {
+            public void onSuccess(Location location) {
                 locationCallback.onSuccess(location);
+            }
+
+            @Override
+            public void onFail(String error) {
+                locationCallback.onError(error);
+
             }
         });
     }
 
     protected void getDefaultLocation() {
         if (CommonUtils.isPlayServiceAvailable(mContext)) {
-            FusedLocationUtils fusedLocationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
+            FusedLocationUtils locationUtils = new FusedLocationUtils(mContext, new FusedCallback() {
                 @Override
-                public void onLocationResult(Location location) {
+                public void onSuccess(Location location) {
                     locationCallback.onSuccess(location);
+                }
+
+                @Override
+                public void onFail(String error) {
+                    locationCallback.onError(error);
+
                 }
             });
         } else {
