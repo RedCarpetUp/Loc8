@@ -65,8 +65,7 @@ public class Loc8 {
             if (CommonUtils.isLocationEnabled(mContext)) {
                 switch (PrefManager.getIntegerPreference(mContext, Constants.ProviderType, 0)) {
                     case 0:
-                        Location defaultLocation = getDefaultLocation();
-                        locationCallback.onSuccess(defaultLocation);
+                     getDefaultLocation();
                         break;
                     case 1:
                         Location providerLocation = getLocationFromProvider();
@@ -102,14 +101,14 @@ public class Loc8 {
         return fusedLocation;
     }
 
-    private Location getDefaultLocation()
+    private void getDefaultLocation()
     {
         if (CommonUtils.isPlayServiceAvailable(mContext))
         {
-            FusedLocationUtils locationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
+            FusedLocationUtils fusedLocationUtils = new FusedLocationUtils(mContext,new FusedLocationUtils.Callback() {
                 @Override
                 public void onLocationResult(Location location) {
-                    fusedLocation = location;
+                    locationCallback.onSuccess(location);
                 }
             });
         }
@@ -117,9 +116,8 @@ public class Loc8 {
         {
             LocationManagerUtils utils = new LocationManagerUtils(mContext);
             Location location = utils.getLocation(mContext);
-            return location;
+            locationCallback.onSuccess(location);
         }
-        return fusedLocation;
     }
 
     public static boolean areThereMockPermissionApps(Context context) {

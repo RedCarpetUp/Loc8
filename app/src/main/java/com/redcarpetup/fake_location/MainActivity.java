@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         mcontext = this;
         locationProvider = (TextView) findViewById(R.id.locationProvider);
         fusedProvider = (TextView) findViewById(R.id.fusedProvider);
+        defaultProvider = (TextView)findViewById(R.id.deaultProvider);
         mock = (TextView) findViewById(R.id.isMock);
         getLocationProvider();
         getFusedProvider();
@@ -59,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Location location) {
-                fusedProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
-
+                defaultProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
             }
         });
 
