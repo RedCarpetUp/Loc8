@@ -13,6 +13,26 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
 * Check whether GPS Provider is enabled or not
 * Check whether Network Provider is enabled or not
 
+# Usage
+
+#### Get location with log8
+'''
+ Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.DEFAULT);
+        loc8.getLocation(new LocationCallback() {
+            @Override
+            public void onError(String error) {
+               
+          }
+
+            @Override
+            public void onSuccess(Location location) {
+              }
+        });
+        
+'''
+
+
+
 # Installation
 
 
