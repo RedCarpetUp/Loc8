@@ -65,14 +65,13 @@ public class Loc8 {
             if (CommonUtils.isLocationEnabled(mContext)) {
                 switch (PrefManager.getIntegerPreference(mContext, Constants.ProviderType, 0)) {
                     case 0:
-                     getDefaultLocation();
+                        getDefaultLocation();
                         break;
                     case 1:
-                        Location providerLocation = getLocationFromProvider();
-                        locationCallback.onSuccess(providerLocation);
+                        getLocationFromProvider();
                         break;
                     case 2:
-                       getLocationFromLocationApi();
+                        getLocationFromLocationApi();
                         break;
                 }
             } else {
@@ -85,35 +84,30 @@ public class Loc8 {
 
     }
 
-    private Location getLocationFromProvider() {
+    protected void getLocationFromProvider() {
         LocationManagerUtils utils = new LocationManagerUtils(mContext);
         Location location = utils.getLocation(mContext);
-        return location;
+        locationCallback.onSuccess(location);
     }
 
-    private Location getLocationFromLocationApi() {
-        FusedLocationUtils fusedLocationUtils = new FusedLocationUtils(mContext,new FusedLocationUtils.Callback() {
+    protected void getLocationFromLocationApi() {
+        FusedLocationUtils fusedLocationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
             @Override
             public void onLocationResult(Location location) {
                 locationCallback.onSuccess(location);
             }
         });
-        return fusedLocation;
     }
 
-    private void getDefaultLocation()
-    {
-        if (CommonUtils.isPlayServiceAvailable(mContext))
-        {
-            FusedLocationUtils fusedLocationUtils = new FusedLocationUtils(mContext,new FusedLocationUtils.Callback() {
+    protected void getDefaultLocation() {
+        if (CommonUtils.isPlayServiceAvailable(mContext)) {
+            FusedLocationUtils fusedLocationUtils = new FusedLocationUtils(mContext, new FusedLocationUtils.Callback() {
                 @Override
                 public void onLocationResult(Location location) {
                     locationCallback.onSuccess(location);
                 }
             });
-        }
-        else
-        {
+        } else {
             LocationManagerUtils utils = new LocationManagerUtils(mContext);
             Location location = utils.getLocation(mContext);
             locationCallback.onSuccess(location);

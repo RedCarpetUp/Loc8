@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         mock = (TextView) findViewById(R.id.isMock);
         getLocationProvider();
         getFusedProvider();
-        getDefaultProvider();
     }
 
     public void getLocationProvider() {
@@ -55,34 +54,16 @@ public class MainActivity extends AppCompatActivity {
         loc8.getLocation(new LocationCallback() {
             @Override
             public void onError(String error) {
-                locationProvider.setText(error);
+                fusedProvider.setText(error);
             }
 
             @Override
             public void onSuccess(Location location) {
-                defaultProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
+                fusedProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
             }
         });
 
     }
-
-    public void getDefaultProvider() {
-        Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.DEFAULT);
-        loc8.getLocation(new LocationCallback() {
-            @Override
-            public void onError(String error) {
-                locationProvider.setText(error);
-            }
-
-            @Override
-            public void onSuccess(Location location) {
-                locationProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
-
-            }
-        });
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
