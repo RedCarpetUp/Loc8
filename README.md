@@ -4,7 +4,7 @@
 
 Loc8 is a android location manager library to get accurate location simply.
 
-This libray use [Android LocationManager](https://developer.android.com/reference/android/location/LocationManager.html)  and very cool and optimized Google play service location provider api [FusedLocationProvider](https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi)uses a mix of hardware to determine location based on the context of the request, meaning it's optimized transparently to you. It will also cache captured locations between applications to avoid unnecessary work to determine location info. So if a user has a variety of location-aware apps, they potentially avoid taxing the device (and waiting) for a location capture as one may have already been cached.
+This libray use [Android LocationManager](https://developer.android.com/reference/android/location/LocationManager.html)  and very cool and optimized Google play service location provider api [FusedLocationProvider](https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi) uses a mix of hardware to determine location based on the context of the request, meaning it's optimized transparently to you. It will also cache captured locations between applications to avoid unnecessary work to determine location info. So if a user has a variety of location-aware apps, they potentially avoid taxing the device (and waiting) for a location capture as one may have already been cached.
 ## By using logy you can get
 
 * Get accurate current location.
@@ -17,7 +17,7 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
 
 #### Get location with Loc8.DEFAULT
 
-By Using Loc8.DEFAULT library check if Google play service is aviliable, if aviliable library access location using FusedLocationProvider and if Google play service not aviliable library access location using Android default <b>Location Manager</b>
+By Using <b>Loc8.DEFAULT</b> TAG library check if Google play service is available, if available library access location using <b>FusedLocationProvider</b> and if Google play service not available library access location using Android default <b>Location Manager</b>
 
 ```
   Loc8 loc8 = Loc8.getInstance(mcontext, Loc8.DEFAULT);
