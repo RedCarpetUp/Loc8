@@ -1,67 +1,10 @@
-# LocationManager and Fake location detector 
+# Location and Fake Location Detector 
 
 <img align="center" src='https://github.com/balrampandey19/FakeLocationDetctor/blob/master/Screen/loc8.png' width='200' height='200'/>
 
-AppLocker is a library to protect apps using a four digit pin
-
-This library allows you to implement a pin lock mechanism in your app easily.
-
-Once enabled a four-digit passcode needs to be entered any time your mobile app is launched. This way your app is safe even if your smartphone or tablet falls into the wrong hands.
+Loc8 is a android location manager library to get accurate location simply.
 
 
-<img align="center" src='https://raw.githubusercontent.com/balrampandey19/AppLocker/master/Screen/screen.png' width='300' height='550'/>
-
-# Usage
-
-
-#### Initilize app loger in App Application class.
-
-```
- AppLocker.getInstance().enableAppLock(this);
-```
-
-
-#### Extend LockActivity in all app activity as base activity.
-
-
-
-```
- public class MainActivity extends LockActivity {
- 
-  @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        }
- 
- }
-```
-
-
-#### Proguard
-
-```
- -dontwarn com.balram.locker.**
-```
-
-
-### Download
-
-#### Add it to your build.gradle with:
-```gradle
-allprojects {
-    repositories {
-        maven { url "https://jitpack.io" }
-    }
-}
-```
-and:
-
-```gradle
-dependencies {
-   compile 'com.github.balrampandey19:AppLocker:1.0.1'
-}
-```
 
 
 # License
