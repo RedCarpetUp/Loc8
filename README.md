@@ -23,9 +23,7 @@ This libray use [Android LocationManager](https://developer.android.com/referenc
         loc8.getLocation(new LocationCallback() {
             @Override
             public void onError(String error) {
-               
-          }
-
+               }
             @Override
             public void onSuccess(Location location) {
               }
