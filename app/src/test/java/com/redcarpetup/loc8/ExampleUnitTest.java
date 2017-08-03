@@ -1,4 +1,4 @@
-package com.redcarpetup.fake_location;
+package com.redcarpetup.loc8;
 
 import org.junit.Test;
 

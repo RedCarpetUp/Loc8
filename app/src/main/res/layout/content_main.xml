@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.redcarpetup.fake_location.MainActivity"
+    tools:context="com.redcarpetup.loc8.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <TextView
@@ -43,21 +43,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Default Provider"
-        android:textSize="20dp"
-        android:layout_marginTop="30dp"
-        />
-    <TextView
-        android:id="@+id/deaultProvider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="isMock"
         android:textSize="20dp"
         android:layout_marginTop="30dp"
@@ -69,6 +54,4 @@
         android:textSize="20dp"
         android:layout_marginTop="10dp"
         />
-
-
 </LinearLayout>

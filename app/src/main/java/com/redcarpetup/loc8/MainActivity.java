@@ -1,4 +1,4 @@
-package com.redcarpetup.fake_location;
+package com.redcarpetup.loc8;
 
 import android.content.Context;
 import android.location.Location;
@@ -9,13 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationCallback;
 import com.redcarpetup.locationdetector.Loc8;
 
 public class MainActivity extends AppCompatActivity {
     Context mcontext;
-    TextView locationProvider, fusedProvider, defaultProvider, mock;
+    TextView locationProvider, fusedProvider, mock;
+    Location mLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
         mcontext = this;
         locationProvider = (TextView) findViewById(R.id.locationProvider);
         fusedProvider = (TextView) findViewById(R.id.fusedProvider);
-        defaultProvider = (TextView)findViewById(R.id.deaultProvider);
         mock = (TextView) findViewById(R.id.isMock);
         getLocationProvider();
         getFusedProvider();
+
     }
 
     public void getLocationProvider() {
@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Location location) {
+                mLocation = location;
+                if(Loc8.isLocationFromMockProvider(mcontext,mLocation))
+                {
+                    mock.setText(""+Loc8.isLocationFromMockProvider(mcontext,mLocation));
+                }
                 locationProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
 
             }
@@ -59,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Location location) {
+                mLocation = location;
+                if(Loc8.isLocationFromMockProvider(mcontext,mLocation))
+                {
+                    mock.setText(""+Loc8.isLocationFromMockProvider(mcontext,mLocation));
+                }
                 fusedProvider.setText("Lat = " + location.getLatitude() + " and " + "Long =" + location.getLongitude());
             }
         });
