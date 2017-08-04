@@ -86,7 +86,21 @@ By Using <b>Loc8.LOCATION_MANAGER</b> TAG  Android default <b>Location Manager</
 
 # Installation
 
+#### Add it to your build.gradle with:
+```gradle
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+and:
 
+```gradle
+dependencies {
+	        compile 'com.github.RedCarpetUp:Loc8:0.1'
+}
+```
 
 
 # License
