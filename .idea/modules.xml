@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Fake_location_detector.iml" filepath="$PROJECT_DIR$/Fake_location_detector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Loc8.iml" filepath="$PROJECT_DIR$/Loc8.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/locationdetector/locationdetector.iml" filepath="$PROJECT_DIR$/locationdetector/locationdetector.iml" />
       <module fileurl="file://$PROJECT_DIR$/locationdetector/locationdetector.iml" filepath="$PROJECT_DIR$/locationdetector/locationdetector.iml" />
     </modules>
   </component>
