@@ -8,9 +8,10 @@ import android.location.Location;
 import android.provider.Settings;
 import android.support.annotation.IntDef;
 import android.util.Log;
+
 import com.redcarpetup.locationdetector.ProviderUtils.FusedCallback;
-import com.redcarpetup.locationdetector.ProviderUtils.LocationCallback;
 import com.redcarpetup.locationdetector.ProviderUtils.FusedLocationUtils;
+import com.redcarpetup.locationdetector.ProviderUtils.LocationCallback;
 import com.redcarpetup.locationdetector.ProviderUtils.LocationManagerUtils;
 import com.redcarpetup.locationdetector.Utils.CommonUtils;
 import com.redcarpetup.locationdetector.Utils.Constants;
@@ -53,6 +54,8 @@ public class Loc8 {
             loc8 = new Loc8(context);
         }
         PrefManager.setIntegerPreference(context, Constants.ProviderType, dara);
+        if (!PermissionUtils.checkLocationPermission(context))
+            PermissionUtils.requestForSpecificPermission(context);
         return loc8;
     }
 
