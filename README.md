@@ -101,12 +101,15 @@ dependencies {
 	        compile 'com.github.RedCarpetUp:Loc8:0.1'
 }
 ```
+## Note
+
+#### Hey, this library is in beta right now so if you face any issues we request you to post an issue and we’ll make sure we solve it asap. Also, if you’re a curious developer, we encourage you to fork and push your changes, we’d love to have you on board as a contributor!
 
 
 # License
 
 ```
-     Copyright [2017] Redcarpetup]
+     Copyright [2017] [Redcarpetup]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
