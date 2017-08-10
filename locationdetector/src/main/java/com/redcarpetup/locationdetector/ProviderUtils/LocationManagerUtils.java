@@ -26,8 +26,8 @@ public class LocationManagerUtils implements LocationListener {
     Location location;
     double latitude;
     double longitude;
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0; // 10 meters
-    private static final long MIN_TIME_BW_UPDATES = 0; // 1 minute
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    private static final long MIN_TIME_BW_UPDATES = 10; // 1 minute
     protected android.location.LocationManager locationManager;
 
     public LocationManagerUtils(Context context) {
