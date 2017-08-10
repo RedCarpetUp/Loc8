@@ -44,6 +44,8 @@ public class Loc8 {
     }
 
 
+
+
     public Loc8(Context context) {
         mContext = context;
     }
