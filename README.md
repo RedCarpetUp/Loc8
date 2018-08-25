@@ -98,7 +98,7 @@ and:
 
 ```gradle
 dependencies {
-	        compile 'com.github.RedCarpetUp:Loc8:0.2'
+	        implementation 'com.github.RedCarpetUp:Loc8:0.2'
 }
 ```
 ## Note
