@@ -1,5 +1,9 @@
 # Location and Fake Location Detector 
 
+
+[![](https://jitpack.io/v/RedCarpetUp/Loc8.svg)](https://jitpack.io/#RedCarpetUp/Loc8)
+
+
 <img align="center" src='https://github.com/balrampandey19/FakeLocationDetctor/blob/master/Screen/loc8.png' width='200' height='200'/>
 
 Loc8 is a android location manager library to get accurate location simply.
